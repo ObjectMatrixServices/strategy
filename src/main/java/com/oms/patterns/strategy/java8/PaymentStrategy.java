@@ -1,17 +1,18 @@
 package com.oms.patterns.strategy.java8;
 
+import java.math.BigDecimal;
+
 public interface PaymentStrategy {
 
-    double pay(double amount);
+    BigDecimal pay(BigDecimal amount);
 
-    static PaymentStrategy cashPayment(){
-        double serviceCharge = 5.00;
-        return amount -> amount + serviceCharge;
+    static PaymentStrategy goldMemberPayment() {
+        BigDecimal serviceFee = new BigDecimal(.50);
+        return amount -> amount.multiply(serviceFee);
     }
 
-    static PaymentStrategy creditCardPayment(){
-        double serviceCharge = 5.00;
-        double creditCardFee = 10.00;
-        return amount -> amount + serviceCharge + creditCardFee;
+    static PaymentStrategy platinumMemberPayment() {
+        BigDecimal serviceFee = new BigDecimal(.25);
+        return amount -> amount.multiply(serviceFee);
     }
 }
